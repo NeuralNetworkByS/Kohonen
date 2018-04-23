@@ -17,6 +17,7 @@ namespace Kohonen
     {
         TrainingData trainingData;
         private float[,] neurons;
+        private float[,] neuronsPrev;
         float learningRate = 0.00f;
         PointsConverter pc = new PointsConverter();
         int numNeurons = 8;
@@ -26,6 +27,7 @@ namespace Kohonen
             trainingData = new TrainingData();
             InitializeComponent();
             initializeNeurons();
+            initNeuronsPrev();
         }
 
         private void TrainButton_Click(object sender, EventArgs e)
@@ -47,16 +49,28 @@ namespace Kohonen
             }
         }
 
+        public void initNeuronsPrev()
+        {
+            neuronsPrev = new float[numNeurons, 3];
+            for (int i = 0; i < numNeurons; i++)
+            {
+                neurons[i, 0] = -1;
+                neurons[i, 1] = -1;
+                neurons[i, 2] = -1;
+            }
+        }
+
         public void trainNeurons(int epochs)
         {
-            float additionalRate = float.Parse(ExtraLearingRate.Text);
+            float neighbourRate = float.Parse(ExtraLearingRate.Text);
+            float neighbourDisFactor = 0.1f;
 
-            for (int i = 0; i < epochs; i++)
+            int i = 0;
+            while (neighbourRate > 0)
             {
+                
                 for (int j = 0; j < 40; j++)
                 {
-                   
-
                     float[] distances = new float[numNeurons];
                     for (int k = 0; k < numNeurons; k++)
                     {
@@ -73,31 +87,17 @@ namespace Kohonen
                     int neighbourUp = minIndex + 1;
                     int neighbourDown = minIndex - 1;
                     
-                    float nonNeighbourRate = 0.6f;
-
-                    /*
-                    for (int k = 0; k < numNeurons; k++)
-                    {
-                        if (k == minIndex || k == neighbourDown || k == neighbourDown)
-                        {
-                            continue;
-                        }
-
-                        neurons[k, 0] += (trainingData.samples[j][0] - neurons[k, 0]) * learningRate * additionalRate * nonNeighbourRate;
-                        neurons[k, 1] += (trainingData.samples[j][1] - neurons[k, 1]) * learningRate * additionalRate * nonNeighbourRate;
-                    }
-                    */
 
                     if (neighbourUp < numNeurons)
                     {
-                        neurons[neighbourUp, 0] += (trainingData.samples[j][0] - neurons[neighbourUp, 0]) * learningRate * additionalRate;
-                        neurons[neighbourUp, 1] += (trainingData.samples[j][1] - neurons[neighbourUp, 1]) * learningRate * additionalRate;
+                        neurons[neighbourUp, 0] += (trainingData.samples[j][0] - neurons[neighbourUp, 0]) * learningRate * neighbourRate;
+                        neurons[neighbourUp, 1] += (trainingData.samples[j][1] - neurons[neighbourUp, 1]) * learningRate * neighbourRate;
                     }
 
                     if (neighbourDown >= 0)
                     {
-                        neurons[neighbourDown, 0] += (trainingData.samples[j][0] - neurons[neighbourDown, 0]) * learningRate * additionalRate;
-                        neurons[neighbourDown, 1] += (trainingData.samples[j][1] - neurons[neighbourDown, 1]) * learningRate * additionalRate;
+                        neurons[neighbourDown, 0] += (trainingData.samples[j][0] - neurons[neighbourDown, 0]) * learningRate * neighbourRate;
+                        neurons[neighbourDown, 1] += (trainingData.samples[j][1] - neurons[neighbourDown, 1]) * learningRate * neighbourRate;
                     }
 
                     
@@ -105,12 +105,52 @@ namespace Kohonen
                     neurons[minIndex, 0] += (trainingData.samples[j][0] - neurons[minIndex, 0]) * learningRate;
                     neurons[minIndex, 1] += (trainingData.samples[j][1] - neurons[minIndex, 1]) * learningRate;
                 }
+
+                // debug
+                Debug.Write("Epoch: " + i + ". ");
+                bool isNeuronsStop = true;
+                for (int z = 0; z < numNeurons; z++)
+                {
+                   
+                    if (neurons[z, 0] != neuronsPrev[z, 0] && neurons[z,1] != neuronsPrev[z, 1])
+                    {
+                        Debug.Write(z + ". Nie. ");
+                        isNeuronsStop = false;
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Write(z + ". Tak. ");
+                    }
+                }
+
+                if (isNeuronsStop)
+                {
+                    neighbourRate -= neighbourDisFactor;
+                    if (neighbourRate < 0.1)
+                    {
+                        neighbourDisFactor = 0.01f;
+                    }
+                    Debug.WriteLine("nRate: " + neighbourRate);
+                }
+
+                for (int z = 0; z < numNeurons; z++)
+                {
+                    neuronsPrev[z, 0] = neurons[z, 0];
+                    neuronsPrev[z, 1] = neurons[z, 1];
+                }
+
+                Debug.WriteLine("");
+                i++;
             }
 
+           
+
+            /*
             for (int i = 0; i < numNeurons; i++)
             {
                 Debug.WriteLine("Neuron " + i + ": (" + neurons[i, 1] + ";" + neurons[i, 0] + ")");
-            }
+            }*/
         }
 
         private void ChartButton_Click(object sender, EventArgs e)
@@ -121,6 +161,7 @@ namespace Kohonen
         private void ResetButton_Click(object sender, EventArgs e)
         {
             initializeNeurons();
+            initNeuronsPrev();
         }
 
         private void Form1_Load(object sender, EventArgs e)

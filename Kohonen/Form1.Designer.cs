@@ -118,7 +118,7 @@
             this.ExtraLearingRate.Name = "ExtraLearingRate";
             this.ExtraLearingRate.Size = new System.Drawing.Size(100, 22);
             this.ExtraLearingRate.TabIndex = 7;
-            this.ExtraLearingRate.Text = "0,01";
+            this.ExtraLearingRate.Text = "0,9";
             // 
             // Form1
             // 
