@@ -35,11 +35,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.EpochsNumberTB = new System.Windows.Forms.TextBox();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ExtraLearingRate = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // TrainButton
             // 
-            this.TrainButton.Location = new System.Drawing.Point(50, 97);
+            this.TrainButton.Location = new System.Drawing.Point(50, 118);
             this.TrainButton.Name = "TrainButton";
             this.TrainButton.Size = new System.Drawing.Size(149, 47);
             this.TrainButton.TabIndex = 0;
@@ -49,7 +51,7 @@
             // 
             // ChartButton
             // 
-            this.ChartButton.Location = new System.Drawing.Point(50, 162);
+            this.ChartButton.Location = new System.Drawing.Point(50, 183);
             this.ChartButton.Name = "ChartButton";
             this.ChartButton.Size = new System.Drawing.Size(149, 47);
             this.ChartButton.TabIndex = 1;
@@ -93,7 +95,7 @@
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(50, 221);
+            this.ResetButton.Location = new System.Drawing.Point(50, 242);
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(149, 47);
             this.ResetButton.TabIndex = 6;
@@ -101,11 +103,30 @@
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(47, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 17);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "eWsu";
+            // 
+            // ExtraLearingRate
+            // 
+            this.ExtraLearingRate.Location = new System.Drawing.Point(99, 76);
+            this.ExtraLearingRate.Name = "ExtraLearingRate";
+            this.ExtraLearingRate.Size = new System.Drawing.Size(100, 22);
+            this.ExtraLearingRate.TabIndex = 7;
+            this.ExtraLearingRate.Text = "0,01";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 280);
+            this.ClientSize = new System.Drawing.Size(239, 300);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.ExtraLearingRate);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.EpochsNumberTB);
@@ -115,6 +136,7 @@
             this.Controls.Add(this.TrainButton);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,6 +151,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox EpochsNumberTB;
         private System.Windows.Forms.Button ResetButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox ExtraLearingRate;
     }
 }
 
