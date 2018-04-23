@@ -33,7 +33,7 @@
             this.LearningRateTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.EpochsNumberTB = new System.Windows.Forms.TextBox();
+            this.EwsuTB = new System.Windows.Forms.TextBox();
             this.ResetButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.ExtraLearingRate = new System.Windows.Forms.TextBox();
@@ -79,19 +79,19 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 48);
+            this.label2.Location = new System.Drawing.Point(39, 79);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 17);
+            this.label2.Size = new System.Drawing.Size(54, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = "epoki";
+            this.label2.Text = "eWsuD";
             // 
-            // EpochsNumberTB
+            // EwsuTB
             // 
-            this.EpochsNumberTB.Location = new System.Drawing.Point(99, 48);
-            this.EpochsNumberTB.Name = "EpochsNumberTB";
-            this.EpochsNumberTB.Size = new System.Drawing.Size(100, 22);
-            this.EpochsNumberTB.TabIndex = 4;
-            this.EpochsNumberTB.Text = "100";
+            this.EwsuTB.Location = new System.Drawing.Point(99, 76);
+            this.EwsuTB.Name = "EwsuTB";
+            this.EwsuTB.Size = new System.Drawing.Size(100, 22);
+            this.EwsuTB.TabIndex = 4;
+            this.EwsuTB.Text = "0,1";
             // 
             // ResetButton
             // 
@@ -106,7 +106,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 76);
+            this.label3.Location = new System.Drawing.Point(47, 48);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 8;
@@ -114,7 +114,7 @@
             // 
             // ExtraLearingRate
             // 
-            this.ExtraLearingRate.Location = new System.Drawing.Point(99, 76);
+            this.ExtraLearingRate.Location = new System.Drawing.Point(99, 48);
             this.ExtraLearingRate.Name = "ExtraLearingRate";
             this.ExtraLearingRate.Size = new System.Drawing.Size(100, 22);
             this.ExtraLearingRate.TabIndex = 7;
@@ -129,7 +129,7 @@
             this.Controls.Add(this.ExtraLearingRate);
             this.Controls.Add(this.ResetButton);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.EpochsNumberTB);
+            this.Controls.Add(this.EwsuTB);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LearningRateTB);
             this.Controls.Add(this.ChartButton);
@@ -149,7 +149,7 @@
         private System.Windows.Forms.TextBox LearningRateTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox EpochsNumberTB;
+        private System.Windows.Forms.TextBox EwsuTB;
         private System.Windows.Forms.Button ResetButton;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox ExtraLearingRate;

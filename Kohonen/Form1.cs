@@ -33,9 +33,8 @@ namespace Kohonen
         private void TrainButton_Click(object sender, EventArgs e)
         {
             learningRate = float.Parse(LearningRateTB.Text);
-            int epochs = Int32.Parse(EpochsNumberTB.Text);
-            trainNeurons(epochs);
-            MessageBox.Show("Trenowanie zakończone.");
+            int epochs = trainNeurons();
+            MessageBox.Show("Trenowanie zakończone. Epoki: " + epochs);
         }
 
         public void initializeNeurons()
@@ -60,12 +59,12 @@ namespace Kohonen
             }
         }
 
-        public void trainNeurons(int epochs)
+        public int trainNeurons()
         {
             float neighbourRate = float.Parse(ExtraLearingRate.Text);
-            float neighbourDisFactor = 0.1f;
+            float neighbourDisFactor = float.Parse(EwsuTB.Text);
 
-            int i = 0;
+            int epochs = 0;
             while (neighbourRate > 0)
             {
                 
@@ -107,7 +106,7 @@ namespace Kohonen
                 }
 
                 // debug
-                Debug.Write("Epoch: " + i + ". ");
+                Debug.Write("Epoch: " + epochs + ". ");
                 bool isNeuronsStop = true;
                 for (int z = 0; z < numNeurons; z++)
                 {
@@ -141,16 +140,10 @@ namespace Kohonen
                 }
 
                 Debug.WriteLine("");
-                i++;
+                epochs++;
             }
 
-           
-
-            /*
-            for (int i = 0; i < numNeurons; i++)
-            {
-                Debug.WriteLine("Neuron " + i + ": (" + neurons[i, 1] + ";" + neurons[i, 0] + ")");
-            }*/
+            return epochs;
         }
 
         private void ChartButton_Click(object sender, EventArgs e)
